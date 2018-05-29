@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
 
 class Sidebar extends Component {
-	render() {
-		return (
-			<div className="App">
-				Sidebar
-			</div>
-		);
-	}
+    render() {
+        return <div className="App">Sidebar</div>;
+    }
 }
 
 export default Sidebar;
