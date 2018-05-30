@@ -51,6 +51,7 @@ const styles = theme => ({
 });
 
 class Sidebar extends Component {
+    //Close dashboard drawer
     handleDrawerClose = () => {
         this.props.handleDrawerClose();
     };
@@ -64,6 +65,7 @@ class Sidebar extends Component {
                     classes={{
                         paper: classNames(
                             classes.drawerPaper,
+                            'drawer',
                             !this.props.open && classes.drawerPaperClose
                         ),
                     }}
@@ -84,8 +86,6 @@ class Sidebar extends Component {
                         </IconButton>
                     </div>
                     <List>{mailFolderListItems}</List>
-                    <Divider />
-                    <List>{otherMailFolderListItems}</List>
                 </Drawer>
             </div>
         );

@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import './Navbar.css';
-import Sidebar from '../Sidebar/Sidebar';
 import { drawerWidth } from '../../Constants/Styles';
 
 const styles = theme => ({
@@ -37,16 +36,9 @@ const styles = theme => ({
 });
 
 class Navbar extends Component {
-    state = {
-        open: false,
-    };
-
+    //Open dashboard drawer
     handleDrawerOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleDrawerClose = () => {
-        this.setState({ open: false });
+        this.props.handleDrawerOpen();
     };
 
     render() {
@@ -57,7 +49,7 @@ class Navbar extends Component {
                     position="absolute"
                     className={classNames(
                         classes.appBar,
-                        this.state.open && classes.appBarShift
+                        this.props.open && classes.appBarShift
                     )}
                 >
                     <Toolbar className="dashboard-navbar">
@@ -68,20 +60,21 @@ class Navbar extends Component {
                             className={classNames(
                                 classes.menuButton,
                                 'drawer-btn',
-                                this.state.open && classes.hide
+                                this.props.open && classes.hide
                             )}
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit" noWrap>
+                        <Typography
+                            className="dashboard-navbar-header"
+                            variant="title"
+                            color="inherit"
+                            noWrap
+                        >
                             Data Visualizer
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Sidebar
-                    open={this.state.open}
-                    handleDrawerClose={this.handleDrawerClose}
-                />
             </div>
         );
     }
