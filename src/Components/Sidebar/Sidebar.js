@@ -1,45 +1,88 @@
-import React, { Component } from "react";
-import classNames from "classnames";
-import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-
+import React, { Component } from 'react';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {
     mailFolderListItems,
-    otherMailFolderListItems
-} from "./SidebarListData";
-import { drawerWidth } from "../../Constants/Styles";
+    otherMailFolderListItems,
+} from './SidebarListData';
+
+import './Sidebar.css';
+import { drawerWidth } from '../../Constants/Styles';
 
 const styles = theme => ({
     drawerPaper: {
-        position: "relative",
-        width: drawerWidth
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
-    toolbar: theme.mixins.toolbar,
-    sidebarHeading: {
-        minHeight: "45px !important"
-    }
+    drawerPaperClose: {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing.unit * 7,
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing.unit * 9,
+        },
+    },
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+    },
 });
 
 class Sidebar extends Component {
+    handleDrawerClose = () => {
+        this.props.handleDrawerClose();
+    };
+
     render() {
-        const { classes } = this.props;
+        const { classes, theme } = this.props;
         return (
-            <div className="dashboard-sidebar">
+            <div>
                 <Drawer
                     variant="permanent"
                     classes={{
-                        paper: classes.drawerPaper
+                        paper: classNames(
+                            classes.drawerPaper,
+                            !this.props.open && classes.drawerPaperClose
+                        ),
                     }}
+                    open={this.props.open}
                 >
                     <div
                         className={classNames(
                             classes.toolbar,
-                            classes.sidebarHeading
+                            'drawer-close-btn'
                         )}
-                    />
-                    <Divider />
+                    >
+                        <IconButton onClick={this.handleDrawerClose}>
+                            {theme.direction === 'rtl' ? (
+                                <ChevronRightIcon />
+                            ) : (
+                                <ChevronLeftIcon />
+                            )}
+                        </IconButton>
+                    </div>
                     <List>{mailFolderListItems}</List>
                     <Divider />
                     <List>{otherMailFolderListItems}</List>
@@ -49,4 +92,4 @@ class Sidebar extends Component {
     }
 }
 
-export default withStyles(styles)(Sidebar);
+export default withStyles(styles, { withTheme: true })(Sidebar);
