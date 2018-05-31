@@ -1,0 +1,13 @@
+.dashboard-navbar {
+    min-height: 45px !important;
+    background-color: #2196f3;
+}
+
+.drawer-btn {
+    max-height: 40px !important;
+    margin-left: -1% !important;
+}
+
+.dashboard-navbar-header {
+    margin-left: -1% !important;
+}

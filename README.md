@@ -19,8 +19,15 @@ $ npm run build
 Eslint setup...
 
 ```sh
-$ npm install babel-eslint --save-dev
-$ npm install prettier-eslint --save-dev
+$ npm install --save-dev \
+  eslint-config-fbjs \
+  eslint-plugin-babel \
+  eslint-plugin-flowtype \
+  eslint-plugin-jsx-a11y \
+  eslint-plugin-react \
+  eslint-plugin-relay \
+  eslint \
+  babel-eslint
 ```
 
 ### Vscode workspace setting
@@ -28,3 +35,4 @@ $ npm install prettier-eslint --save-dev
 *   "editor.formatOnSave": true,
 *   "javascript.format.enable": false,
 *   "prettier.eslintIntegration": true
+*   "prettier.tabWidth": 4
