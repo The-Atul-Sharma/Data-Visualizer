@@ -5,7 +5,7 @@
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ git clone http://advancedserver@192.168.5.71:7990/scm/adr/asidatalab.git
+$ git clone https://github.com/The-Atul-Sharma/Data-Visualizer.git
 $ npm install
 $ npm start
 ```
