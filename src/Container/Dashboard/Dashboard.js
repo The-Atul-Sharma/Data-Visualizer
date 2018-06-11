@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import Papa from 'papaparse';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import FileReader from '../../Components/FileReader/FileReader';
 
 class Dashboard extends Component {
-    state = {
-        open: false,
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            open: false,
+            fileName: '',
+            fileData: null,
+        };
+    }
 
     //Open dashboard drawer
     handleDrawerOpen = () => {
@@ -16,6 +23,23 @@ class Dashboard extends Component {
     //Close dashboard drawer
     handleDrawerClose = () => {
         this.setState({ open: false });
+    };
+
+    handleFileReader = file => {
+        // Parse local CSV file
+
+        let result = null;
+
+        Papa.parse(file, {
+            complete: res => {
+                result = res.data;
+                this.setState({
+                    fileName: file.name,
+                    fileData: result,
+                });
+                console.log(result);
+            },
+        });
     };
 
     render() {
@@ -31,7 +55,10 @@ class Dashboard extends Component {
                         handleDrawerClose={this.handleDrawerClose}
                     />
                 </div>
-                <FileReader />
+                <FileReader
+                    fileName={this.state.fileName}
+                    handleFileReader={this.handleFileReader}
+                />
             </div>
         );
     }

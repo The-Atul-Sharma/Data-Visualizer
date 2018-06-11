@@ -15,6 +15,11 @@ const styles = theme => ({
 });
 
 class FileReader extends Component {
+    // Read File
+    handleFileReader = event => {
+        this.props.handleFileReader(event.target.files[0]);
+    };
+
     render() {
         const { classes } = this.props;
         return (
@@ -25,6 +30,7 @@ class FileReader extends Component {
                     id="contained-button-file"
                     multiple
                     type="file"
+                    onChange={this.handleFileReader}
                 />
                 <label htmlFor="contained-button-file">
                     <Button
@@ -35,6 +41,7 @@ class FileReader extends Component {
                         Upload
                     </Button>
                 </label>
+                <span>{this.props.fileName}</span>
             </div>
         );
     }
